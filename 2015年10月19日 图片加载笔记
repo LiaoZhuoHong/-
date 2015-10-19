@@ -1,0 +1,14 @@
+
+在项目中碰到这样一个需求，加载网络的图片需要以屏幕的宽为基准，成比例的放大或者缩小图片以适应屏幕。
+也就是说，无论是什么样的图片在项目的页面上展示的都是宽度固定，高度依据图片比例来显示。
+
+项目中加载图片用的是Volley框架中的ImageLoad，在加载图片的回调中会取到一个bitmap对象，对象是已经被等比压缩过的。
+在取到bitmap对象以后，可以根据bitmap的宽高得到一个比值scaleValue。在取到你需要确定的显示的宽度，例如在项目中我取
+的是屏幕的宽减去32个dp对应的像素值，设为ImageWidth。
+
+去屏幕宽的方法和把32个dp转换成px值得方法请自行百度。
+
+在拿到比值scaleValue和ImageWidth后，可以算出装载bitmap的Imageview的高度ImageHeight=sacleValue*ImageWidth;
+然后在给ImageView设置LayoutParams的宽高，这样就实现功能了。
+
+代码如下：
